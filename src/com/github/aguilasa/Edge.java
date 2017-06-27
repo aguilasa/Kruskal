@@ -29,13 +29,11 @@ public class Edge {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append(" (");
+		builder.append("(");
 		builder.append(source);
 		builder.append(", ");
 		builder.append(destiny);
 		builder.append(")");
-		builder.append(" = ");
-		builder.append(weight);
 		return builder.toString();
 	}
 

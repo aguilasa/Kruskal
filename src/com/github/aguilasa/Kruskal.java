@@ -39,10 +39,14 @@ public class Kruskal {
 			VertexSet u = findSet(sets, e.getSource());
 			VertexSet v = findSet(sets, e.getDestiny());
 
+			System.out.println("e = " + e);
 			if (!u.equals(v)) {
 				a.add(e);
 				union(sets, u, v);
+				System.out.println("sets = { " + sets.toString().replaceAll("\\]|\\[", "") + " }");
 			}
+
+			System.out.println("--------------------------------------------------");
 
 		}
 
@@ -85,18 +89,16 @@ public class Kruskal {
 	}
 
 	public static void main(String[] args) {
+
 		Kruskal g = new Kruskal();
-		g.addEdge("A", "B", 4);
-		g.addEdge("A", "D", 3);
-		g.addEdge("A", "E", 4);
-		g.addEdge("B", "C", 8);
-		g.addEdge("B", "E", 9);
-		g.addEdge("B", "F", 5);
-		g.addEdge("C", "D", 9);
-		g.addEdge("C", "E", 3);
-		g.addEdge("C", "F", 2);
-		g.addEdge("D", "F", 7);
-		g.addEdge("E", "F", 2);
+		List<String> loadFileToList = Utils.loadFileToList("entradas/01.txt");
+		for (String line : loadFileToList) {
+			String[] split = line.split(",");
+			String v1 = split[0].trim();
+			String v2 = split[1].trim();
+			int w = Integer.valueOf(split[2].trim());
+			g.addEdge(v1, v2, w);
+		}
 
 		List<Edge> a = g.kruskal();
 		System.out.println(a);
