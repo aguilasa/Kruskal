@@ -31,7 +31,7 @@ public class Edge {
 		StringBuilder builder = new StringBuilder();
 		builder.append("(");
 		builder.append(source);
-		builder.append(", ");
+		builder.append(",");
 		builder.append(destiny);
 		builder.append(")");
 		return builder.toString();

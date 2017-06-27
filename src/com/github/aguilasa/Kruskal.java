@@ -7,6 +7,8 @@ import java.util.Set;
 
 public class Kruskal {
 
+	private static final String VALUES = "| %s\t|%s|\r\n";
+	private static final String LINE = "---------------------\r\n";
 	private List<Vertex> vertices = new ArrayList<>();
 	private List<Edge> edges = new ArrayList<>();
 
@@ -34,6 +36,18 @@ public class Kruskal {
 		List<Edge> a = new ArrayList<>();
 		Set<VertexSet> sets = makeSets();
 		sortEdges();
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(LINE);
+		sb.append("|\te\t|\tc(e)\t|\r\n");
+		for (Edge e : edges) {
+			String value = e.getWeight() < 10000 ? String.format("  %d\t\t", e.getWeight()) : String.format("  %d\t", e.getWeight()); 
+			sb.append(LINE);
+			sb.append(String.format(VALUES, e.toString(), value));
+		}
+		sb.append(LINE);
+		System.out.println(sb);
+		System.out.println();
 
 		for (Edge e : edges) {
 			VertexSet u = findSet(sets, e.getSource());
