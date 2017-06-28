@@ -49,6 +49,8 @@ public class Kruskal {
 		System.out.println(sb);
 		System.out.println();
 
+		printSets(sets);
+		System.out.println();
 		for (Edge e : edges) {
 			VertexSet u = findSet(sets, e.getSource());
 			VertexSet v = findSet(sets, e.getDestiny());
@@ -57,7 +59,7 @@ public class Kruskal {
 			if (!u.equals(v)) {
 				a.add(e);
 				union(sets, u, v);
-				System.out.println("sets = { " + sets.toString().replaceAll("\\]|\\[", "") + " }");
+				printSets(sets);
 			}
 
 			System.out.println("--------------------------------------------------");
@@ -65,6 +67,10 @@ public class Kruskal {
 		}
 
 		return a;
+	}
+
+	private void printSets(Set<VertexSet> sets) {
+		System.out.println("sets = { " + sets.toString().replaceAll("\\]|\\[", "") + " }");
 	}
 
 	private Set<VertexSet> makeSets() {
@@ -105,7 +111,7 @@ public class Kruskal {
 	public static void main(String[] args) {
 
 		Kruskal g = new Kruskal();
-		List<String> loadFileToList = Utils.loadFileToList("entradas/01.txt");
+		List<String> loadFileToList = Utils.loadFileToList(args[0]);
 		for (String line : loadFileToList) {
 			String[] split = line.split(",");
 			String v1 = split[0].trim();
@@ -115,7 +121,14 @@ public class Kruskal {
 		}
 
 		List<Edge> a = g.kruskal();
-		System.out.println(a);
+		int sum = 0;
+		for (Edge e : a) {
+			sum += e.getWeight();
+		}
+		System.out.println();
+		System.out.println(String.format("c(F) = %d", sum));
+		System.out.println();
+		System.out.println("A = {" + a.toString().replaceAll("\\]|\\[", "") + "}");
 	}
 
 }
